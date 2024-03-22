@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twilio Chatbot Conversation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .customer {
+            color: blue;
+        }
+        .chatbot {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Twilio Chatbot Conversation</h1>
+    <div id="conversation"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var conversationDiv = document.getElementById('conversation');
+
+        socket.on('chat_message', function(data) {
+            var message = document.createElement('div');
+            var className = data.message.startsWith('Customer:') ? 'customer' : 'chatbot';
+            message.className = className;
+            message.textContent = data.message;
+            conversationDiv.appendChild(message);
+        });
+    </script>
+</body>
+</html>
