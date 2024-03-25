@@ -138,4 +138,8 @@ def voice():
 
 if __name__ == '__main__':
     prompt = read_prompt_from_csv(prompt_file_path)
-    socketio.run(app, debug=True)
+    # Get the PORT environment variable, default to 8000 if not set
+    port = int(os.environ.get('PORT', 8000))
+    # Start the Flask application on the specified port and bind to all network interfaces
+    socketio.run(app, host='0.0.0.0', port=port, debug=True)
+
