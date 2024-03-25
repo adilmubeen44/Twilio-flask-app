@@ -14,14 +14,19 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # Azure Speech configuration
-SPEECH_KEY = "55d11eb5446d48caa11abbd23a6abddf"  # Replace with your actual Speech key
-SPEECH_REGION = "eastus"  # Replace with your actual Speech region
+SPEECH_KEY = os.getenv('SPEECH_KEY')  # Fallback value is optional
+SPEECH_REGION = os.getenv('SPEECH_REGION')
 
 # Azure Function environment variables
-OPENAI_API_KEY = "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"  # Replace with your actual OpenAI API key
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Initialize OpenAI client
 openai.api_key = OPENAI_API_KEY
+
+if not all([SPEECH_KEY, SPEECH_REGION, OPENAI_API_KEY]):
+    raise ValueError("One or more required environment variables are missing.")
+
+
 
 # Chat variables
 chat_history = ""
