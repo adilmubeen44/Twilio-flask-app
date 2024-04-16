@@ -49,7 +49,7 @@ def from_twilio(request):
     text_to_speech(chatbot_reply)
     
     # Emit response to clients
-    emit('chat_message', {'message': chatbot_reply}, broadcast=True)
+    socketio.emit('chat_message', {'message': chatbot_reply}, broadcast=True)  # Use socketio.emit instead of emit
     
     # Return Twilio-compatible response
     return chatbot_reply
