@@ -124,12 +124,12 @@ def handle_connect():
     emit('chat_message', {'message': 'Connected to the server.'})
 
 # Twilio SMS endpoint
-@app.route('/sms', methods=['POST'])
-def sms():
-    response_text = from_twilio(request)
-    resp = MessagingResponse()
-    resp.message(response_text)
-    return str(resp)
+# @app.route('/sms', methods=['POST'])
+# def sms():
+#     response_text = from_twilio(request)
+#     resp = MessagingResponse()
+#     resp.message(response_text)
+#     return str(resp)
 
 # Twilio voice endpoint
 @app.route("/voice", methods=['POST'])
